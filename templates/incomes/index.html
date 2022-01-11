@@ -11,13 +11,13 @@
         <div class="col-md-10">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{% url 'expenses'%}">Expenses</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">My expense</li>
+                  <li class="breadcrumb-item"><a href="{% url 'incomes'%}">Incomes</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">My incomes</li>
                 </ol>
               </nav>
         </div>
         <div class="col-md-2">
-            <a href="{% url 'expense-add'%}" class="btn btn-outline-primary"> Add Expense</a>
+            <a href="{% url 'income-add'%}" class="btn btn-outline-primary"> Add Income</a>
         </div>
     </div>
 
@@ -36,22 +36,22 @@
                     <thead>
                         <tr>
                             <th>Amount ({{currency}})</th>
-                            <th>Category</th>
+                            <th>Source</th>
                             <th>Description</th>
                             <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% if expenses %}
-                        {% for expense in expenses %}
+                        {% if incomes %}
+                        {% for income in incomes %}
                         <tr>
-                            <td>{{expense.amount}}</td>
-                            <td>{{expense.category}}</td>
-                            <td>{{expense.description}}</td>
-                            <td>{{expense.date}}</td>
+                            <td>{{income.amount}}</td>
+                            <td>{{income.source}}</td>
+                            <td>{{income.description}}</td>
+                            <td>{{income.date}}</td>
                             <td>
-                                <a href="{% url 'expense-edit' expense.pk %}" class="btn btn-primary btn-xs">Edit</a>
-                                <a href="{% url 'expense-delete' expense.pk %}" class="btn btn-danger btn-xs">Delete</a>
+                                <a href="{% url 'income-edit' income.pk %}" class="btn btn-primary btn-xs">Edit</a>
+                                <a href="{% url 'income-delete' income.pk %}" class="btn btn-danger btn-xs">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -67,7 +67,7 @@
                     <thead>
                         <tr>
                             <th>Amount ({{currency}})</th>
-                            <th>Category</th>
+                            <th>Source</th>
                             <th>Description</th>
                             <th>Date</th>
                         </tr>
@@ -105,6 +105,6 @@
         </div>
     </div>
 </div>
-<script src="{% static 'js/expenses/search.js'%}"></script>
+<script src="{% static 'js/incomes/search.js'%}"></script>
 
 {% endblock %}

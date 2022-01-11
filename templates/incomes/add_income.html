@@ -8,15 +8,15 @@
         <div class="col-md-10">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{% url 'expenses'%}">Expenses</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Add expense</li>
+                  <li class="breadcrumb-item"><a href="{% url 'incomes'%}">Incomes</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add Income</li>
                 </ol>
               </nav>
         </div>
     </div>
     <div class="row">
       {% include "partials/_messages.html" %}
-    <form action="{% url 'expense-add' %}" method="post">
+    <form action="{% url 'income-add' %}" method="post">
         {% csrf_token %}
         <div class="form-group row">
           <label for="amount" class="col-sm-2 col-form-label">Amount</label>
@@ -31,17 +31,17 @@
             </div>
         </div>
         <div class="form-group row">
-          <label for="category" class="col-sm-2 col-form-label">Category</label>
+          <label for="source" class="col-sm-2 col-form-label">Sources</label>
           <div class="col-sm-10">
-            <select name="category" id="category" class="form-control form-control-sm">
-                {% if categories %}
+            <select name="source" id="source" class="form-control form-control-sm">
+                {% if sources %}
 
-                {% for category in categories %}
-                <option value="{{category.name}}">{{category.name}}</option>
+                {% for source in sources %}
+                <option value="{{source.name}}">{{source.name}}</option>
                 {% endfor %}
 
                 {%else %}
-                <option value="no_category">No available category</option>
+                <option value="no_source">No available source</option>
                 {% endif %}
             </select>
           </div>

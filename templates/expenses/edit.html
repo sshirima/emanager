@@ -9,25 +9,25 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{% url 'expenses'%}">Expenses</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Add expense</li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit expense</li>
                 </ol>
               </nav>
         </div>
     </div>
     <div class="row">
       {% include "partials/_messages.html" %}
-    <form action="{% url 'expense-add' %}" method="post">
+    <form action="{% url 'expense-edit' object.id %}" method="post">
         {% csrf_token %}
         <div class="form-group row">
           <label for="amount" class="col-sm-2 col-form-label">Amount</label>
           <div class="col-sm-10">
-            <input type="number" class="form-control form-control-sm" id="amount" name="amount" value="{{values.amount}}">
+            <input type="number" class="form-control form-control-sm" id="amount" name="amount" value="{{object.amount}}">
           </div>
         </div>
         <div class="form-group row">
             <label for="description" class="col-sm-2 col-form-label">Description</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control form-control-sm" id="description" name="description" value="{{values.description}}">
+              <input type="text" class="form-control form-control-sm" id="description" name="description" value="{{object.description}}">
             </div>
         </div>
         <div class="form-group row">
@@ -35,7 +35,7 @@
           <div class="col-sm-10">
             <select name="category" id="category" class="form-control form-control-sm">
                 {% if categories %}
-
+                <option selected value="{{object.category}}">{{object.category}}</option>
                 {% for category in categories %}
                 <option value="{{category.name}}">{{category.name}}</option>
                 {% endfor %}
@@ -46,17 +46,17 @@
             </select>
           </div>
         </div>
-
         <div class="form-group row">
-            <label for="date" class="col-sm-2 col-form-label">Date</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control form-control-sm" id="date" name="date">
-            </div>
-        </div>
+          <label for="date" class="col-sm-2 col-form-label">Date</label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control form-control-sm" value="{{object.date |date:'Y-m-d' }}" id="date" name="date">
+          </div>
+      </div>
         <div class="form-group row">
             <label  class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-              <button type="submit" class="btn btn-outline-primary" >Add</button>
+            <div class="col-sm-2">
+              <a class="btn btn-outline-danger" href="{% url 'expenses'%}">Cancel</a>
+              <button type="submit" class="btn btn-outline-primary" >Update</button>
             </div>
         </div>
       </form>

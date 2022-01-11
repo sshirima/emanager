@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 import django_heroku
+from django.contrib import messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'expenses', 
+    'userpreferences',
+    'incomes',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +134,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
+
+MESSAGE_TAGS= {
+    messages.ERROR : 'danger'
+}
+
+#Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST_USER = 'shirimas.work@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = '246CSOacc##'
+DEFAULT_FROM_EMAIL = 'shirimas.work@gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+#Loging URL
+LOGIN_URL = '/authentication/login/'

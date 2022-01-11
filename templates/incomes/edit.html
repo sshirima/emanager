@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'incomes'%}">Incomes</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Income</li>
+                </ol>
+              </nav>
+        </div>
+    </div>
+    <div class="row">
+      {% include "partials/_messages.html" %}
+    <form action="{% url 'income-edit' object.id %}" method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+          <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control form-control-sm" id="amount" name="amount" value="{{object.amount}}">
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" id="description" name="description" value="{{object.description}}">
+            </div>
+        </div>
+        <div class="form-group row">
+          <label for="source" class="col-sm-2 col-form-label">Source</label>
+          <div class="col-sm-10">
+            <select name="source" id="source" class="form-control form-control-sm">
+                {% if sources %}
+                <option selected value="{{object.source}}">{{object.source}}</option>
+                {% for source in sources %}
+                <option value="{{source.name}}">{{source.name}}</option>
+                {% endfor %}
+
+                {%else %}
+                <option value="no_source">No available Source</option>
+                {% endif %}
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="date" class="col-sm-2 col-form-label">Date</label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control form-control-sm" value="{{object.date |date:'Y-m-d' }}" id="date" name="date">
+          </div>
+      </div>
+        <div class="form-group row">
+            <label  class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-2">
+              <a class="btn btn-outline-danger" href="{% url 'incomes'%}">Cancel</a>
+              <button type="submit" class="btn btn-outline-primary" >Update</button>
+            </div>
+        </div>
+      </form>
+    </div>
+</div>
+
+
+{% endblock %}
